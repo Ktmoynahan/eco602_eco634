@@ -1,0 +1,8 @@
+my_vec <- 1:6
+mat_2 = matrix(my_vec, nrow = 2, ncol = 3)
+mat_3 = matrix(my_vec, nrow = 3, ncol = 2)
+mat_4 = my_vec
+mat_4 = rbind(7, 8)
+mat_4 = matrix()
+mat_4 = c(my_vec, 7, 8)
+mat_4 = matrix(mat_4, nrow = 4, ncol = 2)

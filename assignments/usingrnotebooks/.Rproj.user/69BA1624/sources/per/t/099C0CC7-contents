@@ -1,0 +1,25 @@
+---
+title: "R Markdown Documents-Part1"
+subtitle: "Anlaysis of Enviromental Data"
+author: "Keegan Moynahan"
+output: 
+  html_document:
+    toc: TRUE
+    toc_float: TRUE
+---
+
+# Introduction
+
+My name is **Keegan Moynahan** and I'm in the *GIST Masters Program*.
+
+# Concepts List
+
+1. I would like to expand my knowledge in R.
+2. I would like to learn more about statistical models.
+3. I also want to practice working with data to create research questions. 
+
+# Course List
+
+* Geocomputation
+* Cartography
+* Computer Mapping 

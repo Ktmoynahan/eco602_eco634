@@ -1,0 +1,11 @@
+require(here)
+ginkgo = data.frame(read.csv(here("data", "ginkgo_data_2022.csv")))
+head(ginkgo)
+
+seed_site = subset(ginkgo, select= c('seeds_present','site_id'))
+trees = length(unique(seed_site$site_id))
+seed = sum(seed_site$seeds_present/10)
+
+boxplot(max_width ~ seeds_present, data = ginkgo, main = "Conditional BoxPlot of Seeds Present")
+
+plot(max_width ~ max_depth, data = ginkgo, xlab = 'Leaf Depth (cm)', ylab = 'Leaf Width (cm)', main = "Scatter Plot of Leaf Depth and Width")
