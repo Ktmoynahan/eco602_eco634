@@ -1,0 +1,13 @@
+---
+title: "Keegan's Class Homepage"
+author: "Keegan Moynahan"
+date: "11/21/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Welcome to Keegan's class page!
+
