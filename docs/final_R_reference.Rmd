@@ -1,0 +1,122 @@
+---
+title: "Keegan's R Reference Guide"
+author: "Keegan Moynahan"
+date: "11/21/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# R Reference Guide {.tabset .tabset-pills}
+
+
+## Loading Data and Packages
+require(here)
+library(here)
+
+library(palmerpenguins)
+require(palmerpenguins)
+
+ginkgo = data.frame(read.csv(here("data", "ginkgo_data_2022.csv")))
+ginkgo
+
+## Data Structures
+
+# c()
+my_vector = c(25, 14, 34, 55)
+my_vector
+# length()
+length_vec = length(my_vector)
+length_vec
+# matrix()
+my_matrix = matrix(1:6)
+#data.frame()
+my_dataframe = data.frame(
+            id = c(1:2),
+            tree = c("oak", "maple"))
+my_dataframe
+# Ginkgo nrow(), ncol(), dim()
+nrow(ginkgo)
+nrow
+ncol(ginkgo)
+ncol
+dim(ginkgo)
+dim
+
+## Subsetting
+
+# $
+ginkgo_width = ginkgo$max_width
+ginkgo_width
+
+# []
+g_row1 = ginkgo[1, ]
+g_row1
+g_element = ginkgo [2,3]
+g_element
+g_col3 = ginkgo[ ,3]
+g_col3
+
+# subset()
+dat_adelie = subset(penguins, species == "Adelie")
+dat_adelie
+
+
+## Numerical Data Exploration
+
+# summary()
+dat_summary = summary(dat_adelie)
+dat_summary
+
+
+#mean()
+fit_adelie = mean(dat_adelie$body_mass_g, na.rm = TRUE)
+fit_adelie
+
+#sd()
+sd_adelie = sd(dat_adelie$body_mass_g, na.rm = TRUE)
+sd_adelie
+
+## Graphical Data Exploration
+
+# plot
+plot(max_depth ~ max_width, data = ginkgo, col = "red", pch = 1, cex = 1, 
+     xlab = 'Leaf Depth (cm)', ylab = 'Leaf Width (cm)', 
+     main = "Scatter Plot of Leaf Depth and Width", xlim = c(30,125), ylim =              c(0,110))
+     
+# hist
+hist(penguins$flipper_length_mm, xlab = "Flipper Length (mm)", breaks = 8)
+
+# boxplot
+boxplot(ginkgo$petiole_length, main = "Boxplot of Petiole Length", ylim = c(0,150),         ylab = "Petiole Length")
+boxplot(max_width ~ seeds_present, data = ginkgo, main = "Conditional BoxPlot of            Seeds Present")
+
+# par
+par(mfrow = c(2, 2))
+hist(penguins$flipper_length_mm, xlab = 'Flipper Length (mm)', main = "Penguins Flipper Length")
+hist(penguins$body_mass_g, xlab = 'Body Mass (g)', main = "Penguins Body Mass")
+hist(penguins$bill_length_mm, xlab = 'Bill Length (mm)', main = "Penguins Bill Length")
+hist(penguins$bill_depth_mm, xlab = 'Bill Depth (mm)', main = "Penguins Bill Depth")
+
+## Distribution Funtions
+
+# dnorm
+dnorm(0, 0, 1)
+
+# pnorm
+pnorm(3, 4, 2)
+
+# qnorm
+qnorm(.99, 0, 1)
+
+# dbinom
+dbinom(3, 4, 0.25)
+
+# pbinom
+pbinom(3, 4, 0.25)
+
+# qbinom
+qbinom(0.5, 50, 0.5)
+
+
