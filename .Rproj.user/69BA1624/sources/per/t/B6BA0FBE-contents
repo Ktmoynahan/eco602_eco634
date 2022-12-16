@@ -1,0 +1,245 @@
+---
+title: "Keegan's Final Data Analysis"
+author: "Keegan Moynahan"
+date: "12/16/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+# Final Data Analysis {.tabset .tabset-pills}
+
+
+## Data
+```{r results='hide'} 
+require(here)
+del = read.csv(here("data", "delomys.csv"))
+```
+
+## Data Exploration
+### Numerical Exploration
+```{r}
+summary(del$body_mass, del$body_length)
+shapiro.test(del$body_mass)
+shapiro.test(del$body_length)
+```
+
+### Graphical Exploration
+```{r fig.align='center'}
+plot(del$body_length, del$body_mass, xlab = "Body Length", ylab = "Body Mass", main = "Scatterplot of Body Mass & Body Length")
+hist(del$body_mass, xlab = "Body Mass", main = "Histogram of Body Mass")
+hist(del$body_length, xlab = "Body Length", main = "Histogram of Body Length", breaks = 8)
+boxplot(del$body_mass ~ del$binomial, main = "Conditional BoxPlot of Body Mass on Species", xlab = "Binimial", ylab = "Body Mass")
+boxplot(del$body_mass ~ del$sex, main = "Conditional BoxPlot of Body Mass on Sex", xlab = "Sex", ylab = "Body Mass")
+boxplot(del$body_mass ~ del$sex + del$binomial, main = "Conditional BoxPlot of Body Mass on Sex and species", xlab = "", ylab = "Body Mass", names = c("female\nDelomys Dorsalis", "male\nDelomys Dorsalis", "female\nDelomys Sublineatus", "male\nDelomys Sublineatus"),
+        las = 2, cex.axis = 0.6)
+```
+
+## Fit Model 1
+### Linear Regression
+```{r}
+fit1 = 
+  lm(
+    formula = body_length ~ body_mass,
+    data = del)
+summary(fit1)
+```
+
+### Residuals
+```{r}
+res1 = residuals(fit1)
+head(res1)
+```
+
+### Histogram
+```{r fig.align='center'}
+hist(res1, xlab = "Residuals of Fit Model 1", main = "Histogram of Residuals for Fit Model 1")
+```
+
+### Shapiro Test
+```{r}
+shapiro.test(res1)
+```
+
+### Corfficent Table
+```{r}
+knitr::kable(coef(summary(fit1)))
+```
+
+### Anova Table
+```{r}
+knitr::kable(anova(fit1))
+```
+
+### AIC
+```{r}
+AIC(fit1)
+```
+
+## Fit Model 2
+### Linear Regression
+```{r}
+fit2 = 
+  lm(
+    formula = body_mass ~ sex,
+    data = del)
+summary(fit2)
+```
+
+### Residuals
+```{r}
+res2 = residuals(fit2)
+head(res2)
+```
+
+### Histogram
+```{r fig.align='center'}
+hist(res2, xlab = "Residuals of Fit Model 2", main = "Histogram of Residuals for Fit Model 2")
+```
+
+### Shapiro Test
+```{r}
+shapiro.test(res2)
+```
+
+### Corfficent Table
+```{r}
+knitr::kable(coef(summary(fit2)))
+```
+
+### Anova Table
+```{r}
+knitr::kable(anova(fit2))
+```
+
+### AIC
+```{r}
+AIC(fit2)
+```
+
+## Fit Model 3
+### Linear Regression
+```{r}
+fit3 = 
+  lm(
+    formula = body_mass ~ binomial,
+    data = del)
+summary(fit3)
+```
+
+### Residuals
+```{r}
+res3 = residuals(fit3)
+head(res3)
+```
+
+### Histogram
+```{r fig.align='center'}
+hist(res3, xlab = "Residuals of Fit Model 3", main = "Histogram of Residuals for Fit Model 3")
+```
+
+### Shapiro Test
+```{r}
+shapiro.test(res3)
+```
+
+### Corfficent Table
+```{r}
+knitr::kable(coef(summary(fit3)))
+```
+
+### Anova Table
+```{r}
+knitr::kable(anova(fit3))
+```
+
+### AIC
+```{r}
+AIC(fit3)
+```
+
+## Fit Model 4
+### Linear Regression
+```{r}
+fit4 = 
+  lm(
+  formula = body_mass ~ sex + binomial,
+  data = del)
+summary(fit4)
+```
+
+### Residuals
+```{r}
+res4 = residuals(fit4)
+head(res4)
+```
+
+### Histogram
+```{r fig.align='center'}
+hist(res4, xlab = "Residuals of Fit Model 4", main = "Histogram of Residuals for Fit Model 4")
+```
+
+### Shapiro Test
+```{r}
+shapiro.test(res4)
+```
+
+### Corfficent Table
+```{r}
+knitr::kable(coef(summary(fit4)))
+```
+
+### Anova Table
+```{r}
+knitr::kable(anova(fit4))
+```
+
+### AIC
+```{r}
+AIC(fit4)
+```
+
+## Fit Model 5
+### Linear Regression
+```{r}
+fit5 = 
+  lm(
+    formula = body_mass ~ sex * binomial,
+    data = del)
+summary(fit5)
+```
+
+### Residuals
+```{r}
+res5 = residuals(fit5)
+head(res5)
+```
+
+### Histogram
+```{r fig.align='center'}
+hist(res5, xlab = "Residuals of Fit Model 5", main = "Histogram of Residuals for Fit Model 5")
+```
+
+### Shapiro Test
+```{r}
+shapiro.test(res5)
+```
+
+### Corfficent Table
+```{r}
+knitr::kable(coef(summary(fit5)))
+```
+
+### Anova Table
+```{r}
+knitr::kable(anova(fit5))
+```
+
+### AIC
+```{r}
+AIC(fit5)
+```
+
+
+
